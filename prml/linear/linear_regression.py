@@ -19,8 +19,12 @@ class LinearRegression():
         t : (N,) np.ndarray
             training dependent variable
         """
-        self.w = np.linalg.pinv(X) @ t
-        self.var = np.mean(np.square(X @ self.w - t))
+        self.coef_, self._residues, self.rank_, self.singular_ = \
+            np.linalg.lstsq(X, t, rcond=None)
+        self.coef_ = np.ravel(self.coef_)
+
+        self.w = self.coef_
+        self.var = self._residues/X.shape[0]
 
     def predict(self, X:np.ndarray, return_std:bool=False):
         """
