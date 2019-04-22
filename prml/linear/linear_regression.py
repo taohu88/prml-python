@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class LinearRegression():
+class LinearRegression:
     """
     Linear regression model
     y = X @ w
